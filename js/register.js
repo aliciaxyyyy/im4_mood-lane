@@ -1,23 +1,30 @@
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Prevent form from submitting normally
+// register.js
+document
+  .getElementById("registerForm")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    console.log(email, password);
-    
     try {
-        const response = await fetch('api/register.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+      const response = await fetch("api/register.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const result = await response.json();
 
-        const result = await response.json();
-        console.log(result);
+      if (result.status === "success") {
+        alert("Registration successful! You can now log in.");
+        window.location.href = "login.html";
+      } else {
+        alert(result.message || "Registration failed.");
+      }
     } catch (error) {
-        console.error('Error:', error);
+      console.error("Error:", error);
+      alert("Something went wrong!");
     }
-});
+  });
