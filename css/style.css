@@ -222,3 +222,48 @@ a {
 a:hover {
     color: #9333ea;
 }
+
+
+#kids-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.child-entry {
+  padding: 1rem;
+  border: 4px solid #d8b4fe; /* purple-300 */
+  background-color: #ffffff;
+  color: #9333ea; /* purple-600 */
+  font-weight: 900;
+  font-family: monospace;
+  box-shadow: 4px 4px 0px 0px rgba(167, 139, 250, 0.3);
+  width: 130px;
+}
+
+.child-entry p {
+  margin: 0;
+}
+
+.child-name {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-bottom: 0.5em !important;
+  text-align: center;
+}
+
+.delete-button {
+  margin-top: 0.5rem;
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem;
+  width: 100%;
+  font-weight: 900;
+  font-family: monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+}
