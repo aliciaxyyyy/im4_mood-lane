@@ -71,13 +71,9 @@ body {
   }
 }
 
-
-
 main {
   margin-left: 300px;
 }
-
-
 
 h1 {
     text-align: center;
@@ -242,6 +238,9 @@ a:hover {
   font-family: monospace;
   box-shadow: 4px 4px 0px 0px rgba(167, 139, 250, 0.3);
   width: 130px;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .child-entry p {
@@ -253,6 +252,9 @@ a:hover {
   margin: 0;
   margin-bottom: 0.5em !important;
   text-align: center;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .delete-button {

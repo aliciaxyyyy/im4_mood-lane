@@ -11,4 +11,4 @@ for ($i = 0; $i < $amount; $i++) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute(["04:E3:9E:20:21:02:89", $emotions[rand(0, count($emotions) - 1)], date("Y-m-d H:i:s", rand($earliestDate, $now))]);
 }
-?>  
+?> 

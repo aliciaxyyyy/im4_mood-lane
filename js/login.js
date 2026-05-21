@@ -4,6 +4,9 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
+  const loginMessage = document.getElementById("loginMessage");
+
+  loginMessage.textContent = "";
 
   try {
     const response = await fetch("api/login.php", {
@@ -15,13 +18,12 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (result.status === "success") {
-      alert("Login successful!");
-      window.location.href = "protected.html";
+      window.location.href = "index.html";
     } else {
-      alert(result.message || "Login failed.");
+      loginMessage.textContent = result.message || "Invalid credentials.";
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("Something went wrong!");
+    loginMessage.textContent = "Something went wrong. Please try again.";
   }
 });
