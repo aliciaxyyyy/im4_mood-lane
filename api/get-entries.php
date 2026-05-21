@@ -11,7 +11,7 @@ require_once("../system/config.php");
 ###################################### receiving a post request from a HTML form, later from ESP
 # insert new user into db
 
-$sql = "SELECT DATE(created_at) AS ForDate, COUNT(*) AS NumPosts FROM   entries WHERE chip_id = ? GROUP BY DATE(created_at) ORDER BY ForDate";
+$sql = "SELECT * FROM entries WHERE chip_id = ? ORDER BY created_at DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$_GET['chip_id']]);
 $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);

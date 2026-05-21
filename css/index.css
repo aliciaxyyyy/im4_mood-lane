@@ -281,11 +281,11 @@ body {
   background:white;
   border:5px solid #d8b4fe;
   box-sizing:border-box;
-  padding:36px 14px 14px;
+  padding:5px;
   display:flex;
   flex-wrap:wrap;
-  align-content:flex-start;
-  gap:8px;
+  align-content:flex-end  ;
+  gap:1px;
   justify-content:center;
   position:relative;
   overflow:visible;
@@ -424,4 +424,16 @@ body {
 .summary p{
   font-size:2rem;
   margin-bottom:10px;
+}
+
+.marble-container{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.marble {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
