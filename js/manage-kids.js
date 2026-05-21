@@ -1,4 +1,4 @@
-// add-child.js
+// manage-kids.js
 
 // load kids
 fetch("api/get-kids.php")
