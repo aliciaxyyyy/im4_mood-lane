@@ -274,31 +274,54 @@ body {
 }
 
 .jar{
-  height:210px;
+  height:200px;
   background:white;
   border:5px solid #d8b4fe;
-  padding:14px;
+  box-sizing:border-box;
+  padding:36px 14px 14px;
   display:flex;
   flex-wrap:wrap;
   align-content:flex-start;
   gap:8px;
   justify-content:center;
   position:relative;
+  overflow:visible;
 }
 
 .jar::before{
   content:"";
   position:absolute;
-  top:0;
-  left:18px;
-  right:18px;
-  height:8px;
+  top:-20px;
+  left: 30px;
+  right: 30px;
+  height:20px;
+  background:#ffffff;
+  border:5px solid #d8b4fe;
+  border-bottom:none;
+  box-sizing:border-box;
+}
+
+.jar::after{
+  content:"";
+  position:absolute;
+  top:-34px;
+  left:34px;
+  right:34px;
+  height:15px;
   background:#fbbf24;
+  border:5px solid #d8b4fe;
+  border-bottom:none;
+  box-sizing:border-box;
 }
 
 .jar-card.active .jar{
   border-color:#ff6b9d;
   box-shadow:7px 7px 0 rgba(255,107,157,.18);
+}
+
+.jar-card.active .jar::before,
+.jar-card.active .jar::after{
+  border-color:#ff6b9d;
 }
 
 .dot{
