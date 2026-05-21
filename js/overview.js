@@ -1,3 +1,5 @@
+let monthlyData = [];
+
 document.addEventListener('DOMContentLoaded', () => {
   // child selector: load kids from API and persist selection
   const childContainer = document.querySelector('.child-selector-container');
@@ -7,23 +9,34 @@ document.addEventListener('DOMContentLoaded', () => {
       const resp = await fetch('api/get-kids.php');
       const data = await resp.json();
       const kids = data.kids || [];
+      const selectedChildValue = localStorage.getItem('selectedChildId');
 
       // build buttons
       childContainer.innerHTML = '';
-      const selectedId = localStorage.getItem('selectedChildId');
 
       kids.forEach((kid, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'child-button';
-        if (String(kid.id) === String(selectedId) || (!selectedId && idx === 0)) btn.classList.add('selected');
-        btn.dataset.id = kid.id;
+        const matchesStoredChipId = String(kid.chip_id) === String(selectedChildValue);
+        const matchesStoredKidId = String(kid.id) === String(selectedChildValue);
+
+        if (matchesStoredChipId || (!selectedChildValue && idx === 0)) {
+          btn.classList.add('selected');
+        }
+
+        if (matchesStoredKidId && !matchesStoredChipId) {
+          localStorage.setItem('selectedChildId', kid.chip_id);
+          btn.classList.add('selected');
+        }
+
+        btn.dataset.id = kid.chip_id;
         btn.innerHTML = `<span class="child-name">${kid.name}</span>`;
         btn.addEventListener('click', () => {
           // set selection and update UI
           Array.from(childContainer.querySelectorAll('.child-button')).forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
-          localStorage.setItem('selectedChildId', kid.id);
+          localStorage.setItem('selectedChildId', kid.chip_id);
           localStorage.setItem('selectedChildName', kid.name);
         });
         childContainer.appendChild(btn);
@@ -77,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clear and rebuild jar grid
     jarGrid.innerHTML = '';
     
-    data.labels.forEach((label) => {
+    data.labels.forEach((label, index) => {
       const isFeatured = label === data.featured;
       const jarCard = document.createElement('div');
       jarCard.className = `jar-card ${isFeatured ? 'featured' : ''}`;
       jarCard.innerHTML = `
-        <div class="jar"></div>
+        <div class="jar jar-${index}"></div>
         <div class="jar-label ${isFeatured ? 'selected' : ''}">${label}</div>
       `;
       jarGrid.appendChild(jarCard);
@@ -107,3 +120,64 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set initial view to month
   updateJarView('month');
 });
+
+
+// -------- Add marbles to jars
+
+// get all emotion entries
+async function loadEmotionEntries() {
+  try {
+    const selectedChildId = localStorage.getItem('selectedChildId');
+    if (!selectedChildId) return;
+
+    const resp = await fetch(`api/get-entries.php?chip_id=${selectedChildId}`);
+    const data = await resp.json();
+    const entries = data.entries || [];
+    console.log(data);
+    
+    // Process entries and add marbles to jars
+    entries.forEach(entry => {
+      let month = new Date(entry.created_at).getMonth(); // 0-11
+      if (monthlyData[month]) {
+        monthlyData[month].push(entry);
+      } else {
+        monthlyData[month] = [entry];
+      }
+    });
+
+    console.log(monthlyData);
+    
+    monthlyData.forEach((entries, month) => {
+      const jar = document.querySelector(`.jar-${month}`);
+      console.log(`.jar-${month}`, jar);
+      
+      if (jar) {
+        entries.forEach(entry => {
+                // For simplicity, let's assume each entry has a 'mood' property that maps to a color
+      const moodColorMap = {
+        Freude: '#FFD700',
+        Trauer: '#4A90E2',
+        Wut: '#FF3333',
+        Ekel: '#2ECC71',
+        Angst: '#9B59B6',
+        Stolz: '#f39512',
+        Ueberraschung: '#ed3bd5',
+        Neutral: '#c3c3c3'
+      };
+      const color = moodColorMap[entry.emotion] || '#000000';
+
+      // Find the corresponding jar based on entry timestamp (for demo, we just add to the first jar)
+      if (jar) {
+        const marble = document.createElement('div');
+        marble.className = 'marble';
+        marble.style.backgroundColor = color;
+        jar.appendChild(marble);
+      }
+        });
+      }
+    });
+  } catch (err) {
+    console.error('Failed loading emotion entries', err);
+  }
+}
+loadEmotionEntries();
