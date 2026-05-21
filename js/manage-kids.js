@@ -6,21 +6,12 @@ fetch("api/get-kids.php")
     .then(data => {
         let list = document.getElementById("kids-list")
         console.log(data);
-        
 
         data.kids.forEach((element, index) => {
-            let childDiv = document.createElement("div");
-            childDiv.className = "child-entry";
-            childDiv.innerHTML = `<p class="child-name">${element.name}</p><p>Chip ID: <br/>${element.chip_id}</p><button class="delete-button" data-id="${element.id}">Delete</button>`;
-            list.appendChild(childDiv);
-            // let row = table.insertRow();
-            // let cell1 = row.insertCell(0);
-            // let cell2 = row.insertCell(1);
-            // let cell3 = row.insertCell(2);
-            // cell1.innerHTML = index + 1 + ".";
-            // cell2.innerHTML = element.name;
-            // cell3.innerHTML = element.chip_id;
-            // cell1.className = "rank";
+          let childDiv = document.createElement("div");
+          childDiv.className = "child-entry";
+          childDiv.innerHTML = `<p class="child-name">${element.name}</p><p>Chip ID: <br/>${element.chip_id}</p><button class="delete-button" data-id="${element.id}">Delete</button>`;
+          list.appendChild(childDiv);
         });
     }) 
     .catch(error => {
@@ -81,21 +72,23 @@ document
 
 // delete child
 document.addEventListener("click", async (e) => {
-    if (e.target.classList.contains("delete-button")) {
-        const id = e.target.getAttribute("data-id");
-        try {
-            const response = await fetch(`api/delete-child.php?id=${id}`, {
-                method: "DELETE",
-            });
-            const result = await response.json();
-            if (result.status === "success") {
-                window.location.reload(); // Reload the page to update the list
-            } else {
-                alert(result.message || "Failed to delete child.");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Something went wrong!");
-        }
+  if (e.target.classList.contains("delete-button")) {
+    const id = e.target.getAttribute("data-id");
+    try {
+      const response = await fetch(`api/delete-child.php?id=${id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (result.status === "success") {
+        window.location.reload(); // Reload the page to update the list
+      } else {
+        alert(result.message || "Failed to delete child.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong!");
     }
+  }
+
+  // selection is handled on the Overview page (index.html)
 });

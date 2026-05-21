@@ -1,4 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // child selector: load kids from API and persist selection
+  const childContainer = document.querySelector('.child-selector-container');
+
+  async function loadChildren() {
+    try {
+      const resp = await fetch('api/get-kids.php');
+      const data = await resp.json();
+      const kids = data.kids || [];
+
+      // build buttons
+      childContainer.innerHTML = '';
+      const selectedId = localStorage.getItem('selectedChildId');
+
+      kids.forEach((kid, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'child-button';
+        if (String(kid.id) === String(selectedId) || (!selectedId && idx === 0)) btn.classList.add('selected');
+        btn.dataset.id = kid.id;
+        btn.innerHTML = `<span class="child-name">${kid.name}</span>`;
+        btn.addEventListener('click', () => {
+          // set selection and update UI
+          Array.from(childContainer.querySelectorAll('.child-button')).forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          localStorage.setItem('selectedChildId', kid.id);
+          localStorage.setItem('selectedChildName', kid.name);
+        });
+        childContainer.appendChild(btn);
+      });
+
+      // if no kids, keep existing static buttons
+    } catch (err) {
+      console.error('Failed loading kids', err);
+    }
+  }
+
+  loadChildren();
+
   const viewModeButtons = Array.from(document.querySelectorAll('.view-modes .view-mode-button'));
   const jarGrid = document.querySelector('.jar-grid');
   const jarSubtitle = document.querySelector('.jar-subtitle');

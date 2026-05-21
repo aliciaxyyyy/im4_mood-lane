@@ -267,10 +267,13 @@ body {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:28px;
+  align-items:start;
 }
 
 .jar-card{
   text-align:center;
+  padding-top:44px; /* reserve space for lid/neck */
+  position:relative;
 }
 
 .jar{
@@ -286,6 +289,7 @@ body {
   justify-content:center;
   position:relative;
   overflow:visible;
+  z-index:2;
 }
 
 .jar::before{
@@ -322,6 +326,26 @@ body {
 .jar-card.active .jar::before,
 .jar-card.active .jar::after{
   border-color:#ff6b9d;
+}
+
+.jar::before,
+.jar::after{
+  z-index:1;
+}
+
+.jar-label{
+  display: block;
+  margin: 0.5rem auto 0;
+  padding: 0.25rem 0.75rem;
+  font-weight: 900;
+  font-family: monospace;
+  font-size: 0.75rem;
+  border: 4px solid #d8b4fe; /* purple-300 */
+  background-color: #ffffff;
+  color: #9333ea; /* purple-600 */
+  width: fit-content;
+  position:relative;
+  z-index:3; /* keep labels above lids */
 }
 
 .dot{
