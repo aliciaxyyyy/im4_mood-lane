@@ -1,0 +1,80 @@
+.insight-row-top, .insight-row-bottom {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+    flex: 1;
+  padding: 1rem;
+  border: 4px solid #d8b4fe; /* purple-300 */
+  background-color: #ffffff;
+  color: #9333ea; /* purple-600 */
+  font-weight: 900;
+  font-family: monospace;
+  box-shadow: 4px 4px 0px 0px rgba(167, 139, 250, 0.3);
+}  
+
+#emotion-flower {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+.petal {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #f472b6; /* pink-400 */
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 0 0;
+    opacity: 0.8;
+    mix-blend-mode: multiply;
+}
+
+.petal.happy {
+    background-color: #9333ea;
+    height: 100px;
+    transform: translate(-50%, -90%);
+}
+
+.petal.sad {
+    background-color: #3b82f6;
+    height: 100px;
+    transform: rotate(45deg) translate(-50%, -90%);
+}   
+.petal.angry {
+    background-color: #ef4444;
+    height: 100px;
+    transform: rotate(90deg) translate(-50%, -90%);
+}
+.petal.scared {
+    background-color: #fbbf24;
+    height: 100px;
+    transform: rotate(135deg) translate(-50%, -90%);
+}
+.petal.disgusted {
+    background-color: #10b981;
+    height: 100px;
+    transform: rotate(180deg) translate(-50%, -90%);
+}
+.petal.proud {
+    background-color: #8b5cf6;
+        height: 100px;
+    transform: rotate(225deg) translate(-50%, -90%);
+}
+.petal.surprised {
+    background-color: #6b7280;
+    height: 100px;
+    transform: rotate(270deg) translate(-50%, -90%);
+}
+.petal.neutral {
+    background-color: #9ca3af;
+    height: 100px;
+    transform: rotate(315deg) translate(-50%, -90%);
+}

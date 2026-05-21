@@ -1,11 +1,7 @@
-* {
-  text-align: center;
-}
 
-#loginForm {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+
+body {
+    background-image: linear-gradient(to bottom right, #fcc7f3, #f3e8ff, #dbeafe);
+    height: 100vh;
+} 
+

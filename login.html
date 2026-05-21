@@ -6,11 +6,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/login.css" />
   </head>
-  <body>
+  <body class="floating-dots-container">
     <h1>MOOD LANE</h1>
 
     <form id="loginForm">
-      <p>Welcome Back</p>
+      <div class="corner-pixel top left"></div>
+      <div class="corner-pixel top right"></div>
+      <div class="corner-pixel bottom left"></div>
+      <div class="corner-pixel bottom right"></div>
+
+      <h2>> Welcome Back</h2>
       <p>Every emotion has its place here.</p>
       <div>
         <label>Email</label>
@@ -26,5 +31,6 @@
     </form>
 
     <script src="js/login.js"></script>
+    <script src="js/floating-dots.js"></script>
   </body>
 </html>

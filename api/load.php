@@ -20,10 +20,11 @@ $input = json_decode($inputJSON, true);
 
 ###################################### receiving a post request from a HTML form, later from ESP
 
-$wert = $input["emotion"];         // Hol den Wert an der Stelle "emotion" aus dem JS-Objekt (ehemals JSON-String)
+$user = $input["kind"];         // Hol den Wert an der Stelle "emotion" aus dem JS-Objekt (ehemals JSON-String)
+$emotion = $input["emotion"];         // Hol den Wert an der Stelle "emotion" aus dem JS-Objekt (ehemals JSON-String)
 # insert new user into db
-$sql = "INSERT INTO sensordata (emotion) VALUES (?)";
+$sql = "INSERT INTO entries (chip_id, emotion) VALUES (?, ?)";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$wert]);
+$stmt->execute([$user, $emotion]);
 
 ?>
