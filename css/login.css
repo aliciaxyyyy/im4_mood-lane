@@ -5,3 +5,10 @@ body {
     height: 100vh;
 } 
 
+.login-message {
+    min-height: 1.25rem;
+    margin: 0.5rem 0 0;
+    color: #b91c1c;
+    font-weight: 700;
+}
+
