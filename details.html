@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/style.css">
@@ -28,23 +29,25 @@
     </div>
 
     <main>
-        <h1>Emmas January 2026</h1>
+        <h1><span id="child-name"></span>'s Summary</h1>
+        <h2><span id="date-start"></span> - <span id="date-end"></span></h2>
         <div class="insight-row-top">
             <div class="card emotion-flower">
-                <h2>> Emotion Flower</h2>
-                <div id="emotion-flower">
-                    <div class="petal happy"></div>
-                    <div class="petal sad"></div>
-                    <div class="petal angry"></div>
-                    <div class="petal scared"></div>
-                    <div class="petal surprised"></div>
-                    <div class="petal disgusted"></div>
-                    <div class="petal proud"></div>
-                    <div class="petal neutral"></div>
-                </div>
+              <h2>> Emotion Radar</h2>
+              <canvas id="emotion-radar" width="360" height="360" aria-label="Emotion radar chart"></canvas>
             </div>
             <div class="card emotion-breakdown">
                 <h2>> Emotion Breakdown</h2>
+                <div id="emotion-breakdown">
+                    <div class="emotion-bar happy"><span>Happy</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar proud"><span>Proud</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar angry"><span>Angry</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar surprised"><span>Surprised</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar afraid"><span>Afraid</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar sad"><span>Sad</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar disgusted"><span>Disgusted</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                    <div class="emotion-bar neutral"><span>Neutral</span><span class="emotion-percentage">0%</span><div class="bar"><div class="fill"></div></div></div>
+                </div>
             </div>
         </div>
         <div class="insight-row-bottom">
@@ -59,5 +62,8 @@
             </div>
         </div>
     </main>
+
+    <script src="js/mobile-sidebar.js"></script>
+    <script src="js/details.js"></script>
   </body>
 </html>

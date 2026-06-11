@@ -73,6 +73,7 @@ body {
 
 main {
   margin-left: 300px;
+  margin-right: calc(300px - 212px);
 }
 
 h1 {
@@ -238,7 +239,9 @@ a:hover {
   font-family: monospace;
   box-shadow: 4px 4px 0px 0px rgba(167, 139, 250, 0.3);
   width: 130px;
+  min-width: 0;
   box-sizing: border-box;
+  overflow: hidden;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -253,8 +256,10 @@ a:hover {
   margin-bottom: 0.5em !important;
   text-align: center;
   line-height: 1.1;
+  max-width: 100%;
   overflow-wrap: anywhere;
-  word-break: break-word;
+  word-break: normal;
+  white-space: normal;
 }
 
 .delete-button {
@@ -268,4 +273,108 @@ a:hover {
   font-family: monospace;
   cursor: pointer;
   transition: all 0.2s;
+}
+
+@media (max-width: 767px) {
+  .manage-kids-page .sidebar-container {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .manage-kids-page .sidebar {
+    display: flex !important;
+    width: min(16rem, 82vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    pointer-events: auto;
+  }
+
+  body.sidebar-open .manage-kids-page .sidebar {
+    transform: translateX(0);
+  }
+
+  .manage-kids-page .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(17, 24, 39, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    pointer-events: auto;
+  }
+
+  body.sidebar-open .manage-kids-page .sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .manage-kids-page .sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    border: 4px solid #ec4899;
+    background: #ffffff;
+    color: #374151;
+    font-family: monospace;
+    font-weight: 900;
+    box-shadow: 4px 4px 0 rgba(255, 107, 157, 0.3);
+    cursor: pointer;
+  }
+
+  .manage-kids-page main {
+    margin-left: 0;
+    padding: 4.5rem 1rem 1rem;
+    box-sizing: border-box;
+  }
+
+  .manage-kids-page h1 {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .manage-kids-page form {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .manage-kids-page #kids-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .manage-kids-page .child-entry {
+    width: 100%;
+  }
+
+  .manage-kids-page .child-name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .manage-kids-page main {
+    margin-left: 16rem;
+    padding: 1.25rem;
+  }
+
+  .manage-kids-page #kids-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .manage-kids-page .child-entry {
+    width: 100%;
+  }
 }
