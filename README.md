@@ -104,7 +104,7 @@ Da diese Fragen weitere Anpassungen der Systemarchitektur erfordert hätten, wur
 
 ## Bauanleitung Physical Computing
 
-* ***Was muss ich wie bauen, verbinden, installieren?***  
+**Was muss ich wie bauen, verbinden, installieren?** <br>  
 Man braucht folgende Hardware:
 * Steckplatine
 * ESP32-C6 Mikrocontroller
