@@ -95,11 +95,156 @@ Da diese Fragen weitere Anpassungen der Systemarchitektur erfordert hätten, wur
      // Optional: Set error mode
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    } catch (Exception $e) {
-   echo "Database connection error: " . $e->getMessage();
-   exit;
+      echo "Database connection error: " . $e->getMessage();
+      exit;
    }
    ?>
    ```
+5. Nachdem auch der physical Teil aufgesetzt ist kann aus der Datenbank in der Tabelle entries die chip_id der Kinder-Karten kopiert werden und damit im Frontend ein neues Kind erstellt werden.
 
-6. Nachdem auch der physical Teil aufgesetzt ist kann aus der Datenbank in der Tabelle entries die chip_id der Kinder-Karten kopiert werden und damit im Frontend ein neues Kind erstellt werden.
+## Bauanleitung Physical Computing
+
+* ***Was muss ich wie bauen, verbinden, installieren?***  
+Man braucht folgende Hardware:
+* Steckplatine
+* ESP32-C6 Mikrocontroller
+* PN532 NFC/RFID Reader
+* 8 NFC-Emotion-Tags, 2 NFC-Profil-Chips
+* Jumper-Kabel (mindestens 4 Stück: rot, schwarz, grün, gelb)
+* Stromquelle
+Zunächst steckt man den Mikrocontroller auf die Steckplatine, so. damit auch der NFC Reader Platz hat. Auf dem roten PN532-Board (Reader)  gibt es kleine DIP-Schalter. Diese müssen vor dem Einstecken korrekt gesetzt werden: Schalter 1 auf ON, Schalter 2 auf OFF. 
+
+**Alle Verbindungen werden über die Steckplatine hergestellt. Die 4 Kabel verbinden ESP32-C6 und PN532:**
+
+| Kabel | ESP32-C6 Pin | PN532 Pin |
+| :--- | :--- |:--- |
+| Rot | 5V | VCC |
+| Schwarz | G (GND) | GND |
+| Grün | GPIO6 | SDA |
+| Gelb | GPIO7 | SCL |
+
+Software installieren:
+In der Arduino IDE müssen diese Bibliotheken über den Library Manager installiert werden: Adafruit PN532 (by Adafruit), Arduino_JSON (by Arduino). Als Board wird ESP32C6 Dev Module unter esp32 by Espressif ausgewählt.
+
+Im Arduino-Sketch werden WLAN-Name, Passwort und die Server-URL eingetragen. Beim Hochladen muss die BOOT-Taste gedrückt gehalten werden, bis “Uploading…” erscheint.
+
+Jeden NFC Tag einzeln auf den PN532 halten, die UID erscheint im Serial Monitor. Diese UIDs werden im Code in das emotions[]-Array eingetragen und der Code erneut hochgeladen.
+
+## Technische Details
+Das Projekt besteht aus zwei Hauptkomponenten:
+
+**Physical-Computing-System**
+* Arduino-basierte Hardware
+* NFC Scanner zur Erkennung der Emotionskugeln
+* RFID-Chips zur Identifikation der Kinder und Emotionen
+* Statusanzeige über eine Farbsignal mit einer Lampe
+
+**Webapplikation**
+* Frontend mit HTML, CSS und JavaScript
+* Backend mit PHP
+* SQL-Datenbank zur Speicherung aller Emotionseinträge, Users und Kinder
+
+Jede Komponente erfüllt eine klar definierte Aufgabe und kommuniziert über die zentrale Datenbank miteinander.
+
+### Datenschnittstelle zwischen Physical Computing und WebApp ###
+
+Die Datenbank fungiert als zentrale Schnittstelle zwischen der Hardware und der Webapplikation.
+
+Der Datenfluss erfolgt wie folgt:
+1. Ein Kind identifiziert sich mit seiner Chip-Karte.
+2. Anschliessend wird eine Emotionskugel durch den Scanner erkannt.
+3. Der Arduino verarbeitet die Informationen und sendet die erfassten Daten an das PHP-Backend.
+4. Das Backend speichert die Daten in der Datenbank.
+5. Die Webapplikation ruft die gespeicherten Daten über PHP-Schnittstellen ab.
+6. JavaScript verarbeitet die empfangenen Daten und visualisiert sie in den verschiedenen Ansichten der Webapp.
+7. Dadurch greifen sowohl das Physical-Computing-System als auch die Webapplikation auf denselben Datenbestand zu und bleiben jederzeit synchron.
+
+
+
+
+## Known bugs
+
+### Was funktioniert noch nicht einwandfrei?
+Aus technischer Sicht funktionieren die zentralen Funktionen wie geplant:
+
+Emotionskugeln werden zuverlässig erkannt.
+*Die Chip-Karten ermöglichen die Unterscheidung mehrerer Kinder.
+*Die Statuslampe signalisiert erfolgreich gelesene Karten.
+*Die Daten werden korrekt in der Datenbank gespeichert.
+*Die Webapp stellt die Daten sowohl in den Jars als auch in den Detailansichten korrekt dar.
+
+Aktuell sind keine kritischen technischen Fehler bekannt. 
+
+### Was ist uns aufgefallen bei der Entwicklung? 
+Während der Entwicklung wurde festgestellt, dass die ursprünglich geplante Flower-Chart für die Detailansicht zu unübersichtlich war und die Daten nur schwer interpretierbar dargestellt wurden.
+
+Aus diesem Grund wurde die Visualisierung durch eine Radar-Chart ("Emotion Map") ersetzt, welche bereits im Figma-Prototyp vorgesehen war. Diese Lösung erwies sich als deutlich verständlicher und gestalterisch überzeugender.
+
+### Was könnte noch verbessert werden? 
+Die Darstellung der Emotionseinträge über die verschiedenen Jars (Tag, Woche, Monat, Jahr) ist funktional, kann jedoch bei einer grossen Anzahl von Einträgen unübersichtlich werden.
+
+Für zukünftige Versionen wäre eine Kalenderansicht sinnvoll. Nutzerinnen und Nutzer könnten dadurch gezielt bestimmte Tage, Wochen, Monate oder Jahre auswählen und schneller auf relevante Einträge zugreifen.
+
+Beispielsweise könnte so unkompliziert nachgesehen werden, welche Emotionen an einem bestimmten Ereignis (z.B. dem Geburtstag des Kindes) erfasst wurden.
+
+## Umsetzungsprozess
+
+### Reflexion / Erfahrung / Lernfortschritt:
+Im Projekt wurde deutlich, dass die Verbindung von Physical Computing und Web-App früh gemeinsam geplant werden muss. Besonders wichtig war die Frage, wann ein Emotionseintrag gespeichert wird. Für Mood Lane wurde die RFID-Erkennung als zentraler Auslöser gewählt, weil sie technisch eindeutig und stabil umsetzbar ist.
+
+Gelernt wurde ausserdem, dass ein haptisches Interface viele Detailfragen mit sich bringt: Wo wird der RFID-Reader platziert? Wie nahe muss die Kugel am Sensor liegen? Wie wird die LED-Farbe definiert? Wie verhindern wir doppelte Einträge? Diese Fragen beeinflussen sowohl die Hardware als auch die Web-App.*  
+
+### Herausforderungen & Lösungen:
+| Herausforderung | Lösung |
+| :--- | :--- |
+| Kind soll keine App bedienen müssen | haptische Murmelbahn als Hauptinterface |
+| Emotion muss eindeutig erkannt werden | RFID-Tags in den Kugeln |
+| Eltern brauchen Orientierung | Web-App mit Monatsübersicht und Insights |
+| Einträge müssen korrigierbar sein | Update- und Delete-Funktionen |
+| direkte Rückmeldung für das Kind | LED leuchtet in Emotionsfarbe |
+| sensible Kinderdaten | Login, Session und Device-Token |
+| doppelte Einträge vermeiden | Cooldown nach RFID-Erkennung |
+
+### Verworfene Ansätze:
+| Ansatz | Grund für Verwerfung |
+| :--- | :--- |
+| Farbsensor zur Erkennung der Kugel | zu anfällig auf Lichtverhältnisse und Material |
+| durchgehende LED-Bahn | für Prototyp nicht zwingend notwendig, LED an Startstation reicht |
+| automatische Emotionsinterpretation | würde diagnostisch wirken und passt nicht zum Ziel des Projekts |
+
+### KI-Einsatz
+Im Projekt wurden KI-Tools zur Unterstützung der Konzeption, Visualisierung und Dokumentation verwendet. Dazu gehörten:
+
+* Ideengenerierung und Schärfung des Konzepts
+* Formulierung der How-might-we-Frage
+* Entwicklung von Personas und Nutzungsszenarien
+* Desktop Research zu Bedürfnissen junger Eltern
+* Erstellung von Mockups und technischen Illustrationen
+* Ausarbeitung von User Flow und CRUD-Logik
+* Einsatz von Github Copilot als Unterstützung beim Schreiben des Codes der Webapp
+* Unterstützung bei README-Struktur, Datenbanklogik und Dokumentation
+
+Die KI wurde als Unterstützung eingesetzt. Die finalen Entscheidungen zur Gestaltung, technischen Umsetzung und Dokumentation wurden vom Projektteam getroffen. 
+
+## Fazit
+Mood Lane verbindet ein haptisches Interface mit einer datenbankgestützten Web-App. Das Projekt zeigt, wie eine reale Handlung des Kindes über RFID-Sensorik erkannt, durch einen ESP32 verarbeitet, an einen Server gesendet, in einer Datenbank gespeichert und anschliessend in einer Web-App visualisiert werden kann.
+
+Der wichtigste Mehrwert liegt nicht im reinen Tracking, sondern im Gesprächsanlass. Mood Lane soll Eltern und Kinder dabei unterstützen, Gefühle im Alltag bewusster wahrzunehmen und spielerisch darüber zu sprechen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
