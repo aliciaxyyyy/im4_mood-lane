@@ -612,6 +612,11 @@ body {
     font-size: 0.95rem;
   }
 
+  .sidebar-toggle:hover {
+    background-color: #fdf2f8; /* pink-50 */
+    border-color: #f472b6; /* pink-300 */
+  }
+
   .child-selector-container {
     gap: 0.5rem;
     margin-bottom: 1.2rem;
