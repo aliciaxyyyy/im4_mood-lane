@@ -214,6 +214,9 @@ fetch("api/get-entries-between-dates.php?chip_id=" + chipId + "&start_date=" + a
             document.querySelector(".emotion-bar.surprised .fill"). style.width = ((surprisedCount / totalCount) * 100).toFixed(1) + "%";
             document.querySelector(".emotion-bar.disgusted .fill"). style.width = ((disgustedCount / totalCount) * 100).toFixed(1) + "%";
             document.querySelector(".emotion-bar.afraid .fill"). style.width = ((afraidCount / totalCount) * 100).toFixed(1) + "%";
+
+            // entry count
+            document.getElementById("entry-count").textContent = totalCount;
     }) 
     .catch(error => {
         console.error("Error during unload:", error);
