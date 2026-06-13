@@ -1,4 +1,4 @@
-// manage-kids.js
+// manage-kids.js - JavaScript code for the manage-kids.html page of the Mood Lane application. This script handles the loading of existing children, adding new children, and deleting children from the list. It interacts with the backend API to fetch, add, and delete child records, updating the UI accordingly.
 
 // load kids
 fetch("api/get-kids.php")

@@ -1,15 +1,6 @@
 <?php
- /*****************************************************
- * Kapitel 12: Website2DB > Schritt 2: Website -> DB
- * load.php
- * Daten als JSON-String vom Formular sender.html (später vom MC) serverseitig empfangen und Daten in die Datenbank einfügen
- * Datenbank-Verbindung
-**************************/
+// API endpoint to retrieve entries for a specific chip_id between two dates provided as query parameters.
 require_once("../system/config.php");
-// echo "This script receives HTTP POST messages and pushes their content into the database.";
-
-###################################### receiving a post request from a HTML form, later from ESP
-# insert new user into db
 
 $sql = "SELECT * FROM entries WHERE chip_id = ? AND created_at BETWEEN ? AND ? ORDER BY created_at DESC";
 $stmt = $pdo->prepare($sql);

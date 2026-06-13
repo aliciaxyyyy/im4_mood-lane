@@ -1,11 +1,13 @@
 h2 {
   text-align: center !important;
+  margin-bottom: 2rem;
 }
 
 .insight-row-top, .insight-row-bottom {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+  justify-content: center;
 }
 
 .card {
@@ -17,7 +19,13 @@ h2 {
   font-weight: 900;
   font-family: monospace;
   box-shadow: 4px 4px 0px 0px rgba(167, 139, 250, 0.3);
+  max-width: 430px;
 } 
+
+canvas {
+    display: block;
+    margin: 0 auto;
+}
 
 .card.emotion-breakdown {
   border-color: #f472b6; 
@@ -30,6 +38,12 @@ h2 {
     height: 200px;
     margin: 0 auto;
     background-color: transparent;
+}
+
+#entry-count {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .petal {

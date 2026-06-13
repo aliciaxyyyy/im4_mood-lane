@@ -1,4 +1,4 @@
-// register.js
+// register.js - JavaScript code for the register.html page of the Mood Lane application. This script handles the registration form submission, sends the email and password to the backend API for user registration, and processes the response to either redirect the user to the login page or display an error message.
 document
   .getElementById("registerForm")
   .addEventListener("submit", async (e) => {

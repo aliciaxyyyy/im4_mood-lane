@@ -1,12 +1,6 @@
 <?php
- /*****************************************************
- * Kapitel 12: Website2DB > Schritt 2: Website -> DB
- * load.php
- * Daten als JSON-String vom Formular sender.html (später vom MC) serverseitig empfangen und Daten in die Datenbank einfügen
- * Datenbank-Verbindung
-**************************/
+// API endpoint called by the physocal device to save new emotion entries into the database. It receives JSON data via HTTP POST, decodes it, and inserts the relevant information into the `entries` table in the database.
 
-echo("huhu");
 require_once("../system/config.php");
 // echo "This script receives HTTP POST messages and pushes their content into the database.";
 

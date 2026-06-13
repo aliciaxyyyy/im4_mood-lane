@@ -1,4 +1,5 @@
 <?php
+// API endpoint for user logout. It destroys the user's session and returns a JSON response indicating that the logout was successful.
 // logout.php
 session_start();
 $_SESSION = [];

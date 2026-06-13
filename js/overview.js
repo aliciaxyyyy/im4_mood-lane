@@ -1,3 +1,4 @@
+// overview.js - JavaScript code for the index.html page of the Mood Lane application. This script handles the loading and rendering of emotion entries in jars for selected children, allowing users to view their mood data in different time ranges (day, week, month, year). It also manages the selection of children and view modes, and provides a summary of emotions in the selected time range.
 document.addEventListener('DOMContentLoaded', () => {
   const childContainer = document.querySelector('.child-selector-container');
   const viewModeButtons = Array.from(document.querySelectorAll('.view-modes .view-mode-button'));
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewModes = {
     day: {
       subtitle: 'Each jar = one day',
-      maxBuckets: 14,
+      maxBuckets: 10000000,
       getBucketKey: (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
       getBucketLabel: (date) => date.toLocaleDateString('en-US', {
         weekday: 'short',
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     week: {
       subtitle: 'Each jar = one week',
-      maxBuckets: 5,
+      maxBuckets: 10000000,
       getBucketKey: (date) => {
         const { weekYear, weekNumber } = getIsoWeekInfo(date);
         return `${weekYear}-W${String(weekNumber).padStart(2, '0')}`;
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     month: {
       subtitle: 'Each jar = one month',
-      maxBuckets: 12,
+      maxBuckets: 10000000,
       getBucketKey: (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`,
       getBucketLabel: (date) => `${date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()} ${date.getFullYear()}`,
       getBucketSortKey: (date) => new Date(date.getFullYear(), date.getMonth(), 1).getTime(),
@@ -218,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
     jarGrid.innerHTML = '';
 
     const bucketList = Array.from(buckets.values()).sort((left, right) => left.sortKey - right.sortKey);
-    const visibleBuckets = typeof config.maxBuckets === 'number'
+    const visibleBuckets = (typeof config.maxBuckets === 'number'
       ? bucketList.slice(-config.maxBuckets)
-      : bucketList;
+      : bucketList).reverse();
 
     renderSummary(visibleBuckets);
 
@@ -265,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return leftDate.getTime() - rightDate.getTime();
       });
+
 
       sortedEntries.forEach((entry) => {
         const marble = document.createElement('div');

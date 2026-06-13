@@ -1,5 +1,5 @@
 <?php
-// register.php
+// API endpoint for user registration. It receives email and password via HTTP POST, checks if the email is already in use, hashes the password, and inserts a new user into the database. The response is returned as JSON indicating success or failure of the registration attempt.
 session_start();
 header('Content-Type: application/json');
 

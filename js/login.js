@@ -1,4 +1,4 @@
-// login.js
+// login.js - JavaScript code for the login.html page of the Mood Lane application. This script handles the login form submission, sends the email and password to the backend API for authentication, and processes the response to either redirect the user to the main page or display an error message. 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 

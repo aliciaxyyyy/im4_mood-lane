@@ -1,4 +1,4 @@
-// logout.js
+// logout.js - JavaScript code for the logout functionality of the Mood Lane application. This script handles the logout button click event, sends a request to the backend API to destroy the user's session, and redirects the user to the login page upon successful logout.
 document.getElementById("logoutBtn").addEventListener("click", async (e) => {
   // Prevent the default button behavior
   e.preventDefault();

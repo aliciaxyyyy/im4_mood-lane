@@ -1,3 +1,4 @@
+// floating-dots.js - JavaScript code to generate and animate floating dots on the background of the Mood Lane application. The script creates multiple dots with random sizes, colors, positions, and animation durations to create a dynamic and visually appealing background effect.
 function generateFloatingDots() {
   const container = document.querySelector('.floating-dots-container');
   const colors = ['#FFD700', '#FF3333', '#4A90E2', '#9B59B6', '#2ECC71', '#95A5A6'];

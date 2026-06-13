@@ -1,4 +1,5 @@
 <?php  
+// API endpoint for user login. It receives email and password via HTTP POST, checks the credentials against the database, and starts a session if the login is successful. The response is returned as JSON indicating success or failure of the login attempt.
 ini_set('session.cookie_secure', 1);
 session_start();
 header('Content-Type: application/json');
@@ -13,12 +14,6 @@ if ($_SERVER ['REQUEST_METHOD'] === 'POST'){
 
     $email = $data['email'];
     $password = $data ['password'];
-
-    // $insert = $pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :pass)");
-    // $insert->execute([
-    //     ":email" => $email,
-    //     ":pass" => $password
-    // ]);
 
     //checken ob schon registriert
     $stmt = $pdo-> prepare ("SELECT id, email, password FROM users WHERE email = :email");

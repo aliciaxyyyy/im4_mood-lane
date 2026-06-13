@@ -1,3 +1,5 @@
+// details.js - JavaScript code for the details.html page of the Mood Lane application. This script retrieves the chip ID and date range from the URL parameters, fetches the corresponding child name and emotion entries from the backend API, and updates the page with the relevant information, including an emotion radar chart and emotion breakdown bars.
+
 // get chip id and start/end dates from url
 const urlParams = new URLSearchParams(window.location.search);
 const chipId = urlParams.get('chip_id');

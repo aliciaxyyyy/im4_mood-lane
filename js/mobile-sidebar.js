@@ -1,3 +1,4 @@
+// mobile-sidebar.js - JavaScript code to handle the mobile sidebar functionality of the Mood Lane application. This script manages the opening and closing of the sidebar.
 document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.querySelector('.sidebar');
   const sidebarContainer = document.querySelector('.sidebar-container');
