@@ -228,13 +228,20 @@ Das Projekt besteht aus drei Dateien die aufeinander aufbauen. sketch-connected-
 ### Projektstruktur / Code-Struktur:
 
 **Arduino Physical Code:**
-Die Datei sketch-connected-final.ino ist in mehrere Bereiche aufgeteilt, damit der Code übersichtlich bleibt. Am Anfang werden die benötigten Bibliotheken eingebunden. Diese werden für den NFC-Reader, die WLAN-Verbindung, das Senden von Daten an den Server und die Verarbeitung von JSON-Daten benötigt. <br>
-Danach folgen die Einstellungen für das WLAN und den Server. Hier sind der WLAN-Name, das Passwort, die Adresse des Servers und die Geräte-ID gespeichert. Zudem werden die Pins definiert, über die der ESP32-C6 mit dem PN532 NFC-Reader verbunden ist.<br>
-Im nächsten Teil sind die beiden Kinderprofile hinterlegt. Jedes Kind hat einen eigenen NFC-Profilchip mit einer eindeutigen UID. Wenn ein Profilchip gescannt wird, merkt sich das System, welches Kind aktuell ausgewählt ist.<br>
-Anschliessend werden die Emotions-Tags definiert. Für jede Emotion sind die UID des NFC-Tags, der Name der Emotion, die Farbe für die Datenbank und die RGB-Werte für die LED gespeichert. Dadurch kann das Programm erkennen, welche Emotion gescannt wurde und welche Farbe angezeigt werden soll.<br>
-Die Funktion setup() wird einmal beim Einschalten des Geräts ausgeführt. Sie startet die serielle Kommunikation, richtet die LED ein, verbindet den NFC-Reader mit dem ESP32 und stellt die WLAN-Verbindung her.<br>
-Die Funktion loop() läuft danach ständig in einer Schleife. Sie wartet darauf, dass ein NFC-Tag gescannt wird. Wird ein Profil-Tag erkannt, wird das entsprechende Kind als aktives Profil gespeichert. Wird ein Emotions-Tag erkannt, sucht das Programm die passende Emotion heraus und lässt die LED in der dazugehörigen Farbe leuchten.<br>
-Anschliessend werden alle wichtigen Informationen wie die UID des Tags, die Emotion, das aktive Kind und die Geräte-ID in einem JSON-Objekt gespeichert. Diese Daten werden dann über eine HTTP-POST-Anfrage an die Datei load.php auf dem Server gesendet. Dort werden sie verarbeitet und in der Datenbank gespeichert.<br>
+Die Datei sketch-connected-final.ino ist in mehrere Bereiche aufgeteilt, damit der Code übersichtlich bleibt. Am Anfang werden die benötigten Bibliotheken eingebunden. Diese werden für den NFC-Reader, die WLAN-Verbindung, das Senden von Daten an den Server und die Verarbeitung von JSON-Daten benötigt.
+
+Danach folgen die Einstellungen für das WLAN und den Server. Hier sind der WLAN-Name, das Passwort, die Adresse des Servers und die Geräte-ID gespeichert. Zudem werden die Pins definiert, über die der ESP32-C6 mit dem PN532 NFC-Reader verbunden ist.
+
+Im nächsten Teil sind die beiden Kinderprofile hinterlegt. Jedes Kind hat einen eigenen NFC-Profilchip mit einer eindeutigen UID. Wenn ein Profilchip gescannt wird, merkt sich das System, welches Kind aktuell ausgewählt ist.
+
+Anschliessend werden die Emotions-Tags definiert. Für jede Emotion sind die UID des NFC-Tags, der Name der Emotion, die Farbe für die Datenbank und die RGB-Werte für die LED gespeichert. Dadurch kann das Programm erkennen, welche Emotion gescannt wurde und welche Farbe angezeigt werden soll.
+
+Die Funktion setup() wird einmal beim Einschalten des Geräts ausgeführt. Sie startet die serielle Kommunikation, richtet die LED ein, verbindet den NFC-Reader mit dem ESP32 und stellt die WLAN-Verbindung her.
+
+Die Funktion loop() läuft danach ständig in einer Schleife. Sie wartet darauf, dass ein NFC-Tag gescannt wird. Wird ein Profil-Tag erkannt, wird das entsprechende Kind als aktives Profil gespeichert. Wird ein Emotions-Tag erkannt, sucht das Programm die passende Emotion heraus und lässt die LED in der dazugehörigen Farbe leuchten.
+
+Anschliessend werden alle wichtigen Informationen wie die UID des Tags, die Emotion, das aktive Kind und die Geräte-ID in einem JSON-Objekt gespeichert. Diese Daten werden dann über eine HTTP-POST-Anfrage an die Datei load.php auf dem Server gesendet. Dort werden sie verarbeitet und in der Datenbank gespeichert.
+
 Zusätzlich gibt es die Funktion connectWiFi(). Sie kümmert sich darum, eine Verbindung mit dem WLAN aufzubauen. Falls die Verbindung einmal verloren geht, versucht diese Funktion automatisch, die Verbindung wiederherzustellen.
 
 **Datenschnittstelle:**
