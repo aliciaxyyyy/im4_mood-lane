@@ -165,50 +165,98 @@ Leuchtet in der passenden Farbe der erkannten Emotion.*
 Hauptprogramm auf dem ESP32. Liest den RFID-Sensor aus, ordnet die Kugel einer Emotion 
 zu, steuert die eingebaute LED an und sendet den Eintrag an die WebApp.
 
-**`api/device/receive_entry.php`**  
-Empfängt den Emotionseintrag vom ESP32 und speichert ihn in der Datenbank.
+**`api/load.php`** 
+Stellt die Verbindung zur Datenbank her und lädt die für die API benötigten Konfigurationen.
 
-**`api/entries/read.php`**  
-Lädt gespeicherte Emotionseinträge aus der Datenbank für die WebApp.
+**`api/login.php`** 
+Verarbeitet die Anmeldung der Eltern und erstellt eine Benutzersitzung.
 
-**`api/entries/update.php`**  
-Aktualisiert bestehende Emotionseinträge, z. B. wenn Eltern eine Notiz ergänzen.
+**`api/logout.php`** 
+Beendet die aktuelle Benutzersitzung und meldet die Eltern von der WebApp ab.
 
-**`api/entries/delete.php`**  
-Löscht falsche oder versehentlich erstellte Emotionseinträge.
+**`api/register.php`** 
+Ermöglicht die Registrierung neuer Elternkonten.
 
-**`api/auth/login.php`**  
-Verarbeitet den Login der Eltern.
+**`api/session.php`** 
+Prüft, ob eine gültige Sitzung besteht und ob ein Benutzer angemeldet ist.
 
-**`api/auth/logout.php`**  
-Beendet die Session und loggt die Eltern aus.
+**`api/get-kids.php`** 
+Lädt die dem Elternkonto zugeordneten Kinder aus der Datenbank.
 
-**`api/auth/auth.php`**  
-Prüft, ob eine Person eingeloggt ist und Zugriff auf die WebApp hat.
+**`api/add-child.php`** 
+Fügt ein neues Kind hinzu und speichert dessen Daten in der Datenbank.
 
-**`system/config.php`**  
-Enthält die Verbindung zur Datenbank.
+**`api/delete-child.php`** 
+Löscht ein Kind aus der Datenbank.
 
-**`index.html`**  
-Zeigt die Hauptansicht der WebApp mit Monatsübersicht.
+**`api/get-entries.php`** 
+Lädt alle gespeicherten Emotionseinträge eines ausgewählten Kindes.
 
-**`entries.html`**  
-Zeigt die Emotionseinträge und die Möglichkeit, Notizen zu ergänzen.
+**`api/get-entries-between-dates.php`** 
+Lädt Emotionseinträge eines Kindes innerhalb eines ausgewählten Zeitraums.
 
-**`insights.html`**  
-Zeigt Auswertungen und Diagramme zu den erfassten Emotionen.
+**`index.html`** 
+Stellt die Hauptansicht der WebApp dar und visualisiert die erfassten Emotionen eines Kindes in Form von Gläsern nach Zeitraum.
 
-**`js/app.js`**  
-Lädt Daten für die Hauptansicht und stellt sie in der WebApp dar.
+**`details.html`** 
+Zeigt die Emotionseinträge eines ausgewählten Zeitraums im Detail an.
 
-**`js/entries.js`**  
-Steuert das Lesen, Bearbeiten und Löschen von Emotionseinträgen.
+**`login.html`** 
+Stellt das Anmeldeformular für Eltern bereit.
 
-**`js/insights.js`**  
-Lädt aggregierte Daten und visualisiert die Emotionen als Diagramme.
+**`register.html`** 
+Stellt das Registrierungsformular für neue Benutzer bereit.
 
-**`css/style.css`**  
-Enthält das Design und Layout der WebApp.
+**`manage-kids.html`** 
+Ermöglicht die Verwaltung der Kinderprofile, einschließlich Hinzufügen und Entfernen von Kindern.
+
+**`js/overview.js`** 
+Lädt Emotionseinträge aus der Datenbank, gruppiert diese nach Zeitraum und stellt sie in der Hauptansicht dar.
+
+**`js/details.js`** 
+Lädt und visualisiert die Emotionseinträge eines ausgewählten Zeitraums in der Detailansicht.
+
+**`js/login.js`** 
+Steuert die Anmeldung der Eltern und die Kommunikation mit der Login-API.
+
+**`js/logout.js`** 
+Steuert den Logout-Vorgang und leitet den Benutzer nach dem Abmelden weiter.
+
+**`js/register.js`** 
+Verarbeitet die Registrierung neuer Benutzerkonten.
+
+**`js/manage-kids.js`** 
+Steuert das Laden, Hinzufügen und Löschen von Kinderprofilen.
+
+**`js/auth-guard.js`** 
+Prüft beim Aufruf geschützter Seiten, ob eine gültige Anmeldung vorliegt.
+
+**`js/mobile-sidebar.js`** 
+Steuert die mobile Navigation und das Verhalten der Seitenleiste auf kleinen Bildschirmen.
+
+**`js/floating-dots.js`** 
+Erzeugt animierte Hintergrundelemente zur visuellen Gestaltung der Benutzeroberfläche.
+
+**`css/style.css`** 
+Enthält globale Designvorgaben und grundlegende Layoutdefinitionen für die gesamte WebApp.
+
+**`css/index.css`** 
+Definiert das Layout und Design der Hauptansicht.
+
+**`css/insight.css`** 
+Enthält die Gestaltung der Auswertungs- und Analyseansichten.
+
+**`css/login.css`** 
+Definiert das Erscheinungsbild der Login-Seite.
+
+**`css/register.css`** 
+Definiert das Erscheinungsbild der Registrierungsseite.
+
+**`generate_emotion_entries.php`** 
+Erzeugt automatisch Testdaten für Emotionseinträge zu Entwicklungs- und Demonstrationszwecken.
+
+**`moodlane.sql`** 
+Enthält die Datenbankstruktur sowie die Tabellen der Anwendung.
 
 ### Die Kommunikationswege
 RFID-Reader liest die ID der Emotionskugel.
