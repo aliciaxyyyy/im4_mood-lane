@@ -226,7 +226,7 @@ Das Projekt besteht aus drei Dateien die aufeinander aufbauen. sketch-connected-
 
 ### Projektstruktur / Code-Struktur:
 
-**Arduino Physical Code:**
+**Arduino Physical Code:** <br>
 Die Datei sketch-connected-final.ino ist in mehrere Bereiche aufgeteilt, damit der Code übersichtlich bleibt. Am Anfang werden die benötigten Bibliotheken eingebunden. Diese werden für den NFC-Reader, die WLAN-Verbindung, das Senden von Daten an den Server und die Verarbeitung von JSON-Daten benötigt.
 
 Danach folgen die Einstellungen für das WLAN und den Server. Hier sind der WLAN-Name, das Passwort, die Adresse des Servers und die Geräte-ID gespeichert. Zudem werden die Pins definiert, über die der ESP32-C6 mit dem PN532 NFC-Reader verbunden ist.
