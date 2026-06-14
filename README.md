@@ -27,9 +27,7 @@ Kinder lernen mithilfe eines spielerischen Ansatzes, ihre Emotionen zu identifiz
 
 Die physische Interaktion mit der Murmelbahn motiviert Kinder zur regelmässigen Nutzung des Systems. Gleichzeitig entsteht eine einfache und verständliche Methode, Emotionen im Alltag zu dokumentieren.
 
-![Physical Computing1](img_readme/Emotionskugel.jpeg)
-![Physical Computing1](img_readme/Physical.jpeg) 
-![Physical Computing1](img_readme/Physical2.jpeg)
+![Physical Pictures](img_readme/Physical_pictures.jpeg)
 
 ### UX & Konzeption
 
@@ -37,7 +35,7 @@ Die physische Interaktion mit der Murmelbahn motiviert Kinder zur regelmässigen
 
 * **Figma:** [Link zum Figma](https://www.figma.com/design/sp9aHmOb6vmgzlygEPm0ih/Mood-Lane-UX?node-id=30-97&p=f&t=RcCNdvFUaCcnoKYK-0)
 * **User Flow \+ Screen Flow** (Screenshot aus Figma)
-![Physical Computing1](img_readme/Userflow.png)
+![Userflow](img_readme/Userflow.png)
 
 ### Welche Features waren angedacht? <br>
 * Physical Computing
@@ -150,7 +148,45 @@ Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Moo
 
 ### Komponentenplan
 Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Mood Lane zusammenarbeiten. Im Zentrum steht der ESP32 als Verbindung zwischen der physischen Murmelbahn und der WebApp.
-![Komponentenplan] (img_readme/Physical
+![Komponentenplan](img_readme/Physical_map.jpeg)
+
+**die eingesetzten Komponenten**
+
+Die eingesetzten Komponenten umfassen sowohl physische Bauteile als auch digitale Systembestandteile. Zu den physischen Komponenten gehören die Emotionskugeln mit RFID-Tags, der RFID-Sensor, der ESP32 und die RGB-LED. Zu den digitalen Komponenten gehören die PHP-API, die MySQL/MariaDB-Datenbank und die WebApp. Zusammen bilden sie den vollständigen Datenfluss von der physischen Erfassung der Emotion bis zur Darstellung in der App.*  
+
+**Sensor:** RFID-Sensor 
+Erkennt die Emotionskugel über den RFID-Tag.
+
+**Aktor:** Eingebaute LED des ESP32 
+Leuchtet in der passenden Farbe der erkannten Emotion.*  
+
+### die Programme (mit Dateinamen)
+
+ADD ALL FILE NAMES
+
+### die Kommunikationswege
+RFID-Reader liest die ID der Emotionskugel.
+ESP32 ordnet die RFID-ID einer Emotion zu.
+RGB-LED leuchtet in der passenden Farbe der erkannten Emotion.
+ESP32 sendet einen HTTP-Request an die PHP-Schnittstelle.
+PHP speichert den neuen Emotionseintrag in der Datenbank.
+WebApp liest die Daten aus der Datenbank.
+Eltern sehen den neuen Eintrag als Grafik oder Detailansicht.*  
+
+### Steckplan
+
+Für Mood Lane werden folgende Elemente berücksichtigt:
+
+**ESP32** 
+Der ESP32 ist die zentrale Steuereinheit. Er liest den RFID-Sensor aus, verarbeitet die erkannte Kugel-ID und steuert die eingebaute LED an.
+
+**RFID-Sensor** 
+Der RFID-Sensor wird mit dem ESP32 verbunden und liest den RFID-Tag der Emotionskugel aus. Je nach verwendetem Modul erfolgt die Verbindung über SPI oder I2C.
+
+**Eingebaute LED des ESP32** 
+Die LED ist direkt auf dem ESP32 integriert. Sie benötigt keine zusätzliche externe Verkabelung und leuchtet in der passenden Farbe der erkannten Emotion.
+
+![Steckplan](img_readme/Physical7.jpeg)
 
 ## Technische Details
 Das Projekt besteht aus zwei Hauptkomponenten:
@@ -179,10 +215,41 @@ Der Datenfluss erfolgt wie folgt:
 4. Das Backend speichert die Daten in der Datenbank.
 5. Die Webapplikation ruft die gespeicherten Daten über PHP-Schnittstellen ab.
 6. JavaScript verarbeitet die empfangenen Daten und visualisiert sie in den verschiedenen Ansichten der Webapp.
-7. Dadurch greifen sowohl das Physical-Computing-System als auch die Webapplikation auf denselben Datenbestand zu und bleiben jederzeit synchron.
+Dadurch greifen sowohl das Physical-Computing-System als auch die Webapplikation auf denselben Datenbestand zu und bleiben jederzeit synchron.
 
+Das Projekt besteht aus drei Dateien die aufeinander aufbauen. sketch-connected-final.ino läuft auf dem ESP32-C6 und ist für das Auslesen des Sensors zuständig. load.php läuft auf dem Webserver und empfängt die Daten. Die WebApp liest dieselbe Datenbank aus und zeigt die Emotionen an.
 
+*sketch-connected-final.ino → load.php:* Der ESP32 sendet nach jedem Scan einen HTTP POST Request via WLAN an den Server. Die Daten werden als JSON übertragen, zum Beispiel *{"uid":"BB:92:D7:48", "emotion":"Freude", "color":"#FFD700", "kind":"04:53:C5:27:21:02:89"}.*
 
+*load.php → MySQL:* Die PHP-Datei empfängt das JSON, liest die Felder aus und schreibt sie per SQL INSERT in die Tabellen in der Datenbank.
+
+*WebApp → MySQL:* Die WebApp liest die Tabellen per SQL SELECT aus und zeigt die Emotionen pro Kind an.
+
+### Projektstruktur / Code-Struktur:
+
+**Arduino Physical Code:**
+Die Datei sketch-connected-final.ino ist in mehrere Bereiche aufgeteilt, damit der Code übersichtlich bleibt. Am Anfang werden die benötigten Bibliotheken eingebunden. Diese werden für den NFC-Reader, die WLAN-Verbindung, das Senden von Daten an den Server und die Verarbeitung von JSON-Daten benötigt. <br>
+Danach folgen die Einstellungen für das WLAN und den Server. Hier sind der WLAN-Name, das Passwort, die Adresse des Servers und die Geräte-ID gespeichert. Zudem werden die Pins definiert, über die der ESP32-C6 mit dem PN532 NFC-Reader verbunden ist.<br>
+Im nächsten Teil sind die beiden Kinderprofile hinterlegt. Jedes Kind hat einen eigenen NFC-Profilchip mit einer eindeutigen UID. Wenn ein Profilchip gescannt wird, merkt sich das System, welches Kind aktuell ausgewählt ist.<br>
+Anschliessend werden die Emotions-Tags definiert. Für jede Emotion sind die UID des NFC-Tags, der Name der Emotion, die Farbe für die Datenbank und die RGB-Werte für die LED gespeichert. Dadurch kann das Programm erkennen, welche Emotion gescannt wurde und welche Farbe angezeigt werden soll.<br>
+Die Funktion setup() wird einmal beim Einschalten des Geräts ausgeführt. Sie startet die serielle Kommunikation, richtet die LED ein, verbindet den NFC-Reader mit dem ESP32 und stellt die WLAN-Verbindung her.<br>
+Die Funktion loop() läuft danach ständig in einer Schleife. Sie wartet darauf, dass ein NFC-Tag gescannt wird. Wird ein Profil-Tag erkannt, wird das entsprechende Kind als aktives Profil gespeichert. Wird ein Emotions-Tag erkannt, sucht das Programm die passende Emotion heraus und lässt die LED in der dazugehörigen Farbe leuchten.<br>
+Anschliessend werden alle wichtigen Informationen wie die UID des Tags, die Emotion, das aktive Kind und die Geräte-ID in einem JSON-Objekt gespeichert. Diese Daten werden dann über eine HTTP-POST-Anfrage an die Datei load.php auf dem Server gesendet. Dort werden sie verarbeitet und in der Datenbank gespeichert.<br>
+Zusätzlich gibt es die Funktion connectWiFi(). Sie kümmert sich darum, eine Verbindung mit dem WLAN aufzubauen. Falls die Verbindung einmal verloren geht, versucht diese Funktion automatisch, die Verbindung wiederherzustellen.
+
+**Datenschnittstelle:**
+Die Datenbank ist die Datenschnittstelle der beiden Teile. Der Code im Arduino sendet ihren Scan an die PHP-Datenbank und diese sendet die Info wie eine API an den Web-App Code. Dort werden diese dann mithilfe von Javascript aufgerufen und dargestellt.
+
+**ERM:** 
+Die Datenbank besteht aus drei Tabellen
+* **users** für registrierte Benutzer durch das Registrier-Formular
+* **kids** für die Kinder, die auf der Webapp erfasst werden
+* **entries** für alle Emotionseinträge, die vom physischen Teil gesendet werden
+
+![Physical4](img_readme/Physical4.jpeg)
+
+**Authentifizierung:**
+Um mit der Webapp interagieren zu können, musss man eingeloggt sein. Dies ist möglich über die Registrier- und Login-Seite. Neue Users werden in der Datenbank gespeichert und das Passwort zur Sicherheit gehasht. Loggt man sich ein wird eine Session gestartet, die sich den Login merkt.
 
 ## Known bugs
 
