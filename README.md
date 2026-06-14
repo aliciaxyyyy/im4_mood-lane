@@ -3,11 +3,11 @@ Mood Lane macht Emotionen sichtbar. Durch die Kombination einer spielerischen Mu
 
 ## Kurzbeschreibung des Projekts
 
-* **Modul:** Interaktive Medien 4 an der Fachhochschule Graubünden (FS26)  
-* **Themenfeld:** IoT-Applikation zum Thema Eltern mit kleinen Kindern  
-* **Name des Projekts:** \*Mood Lane*\  
-* **Team Physical Computing:** \*Natacha-Anina Krenger, Quincy Enoma*\  
-* **Team WebApp:** \*Alicia Gregorini, Maya Nikita Baumann*\
+* **Modul:** *Interaktive Medien 4 an der Fachhochschule Graubünden (FS26)* 
+* **Themenfeld:** *IoT-Applikation zum Thema Eltern mit kleinen Kindern*  
+* **Name des Projekts:** *Mood Lane* 
+* **Team Physical Computing:** *Natacha-Anina Krenger, Quincy Enoma*
+* **Team WebApp:** *Alicia Gregorini, Maya Nikita Baumann*
 
 Mood Lane ist ein interaktives Physical-Computing-System, das Eltern dabei unterstützt, die Emotionen ihrer Kinder besser zu verstehen und nachzuvollziehen. Durch eine spielerische Kombination aus einer physischen Murmelbahn und einer Webapplikation können Kinder ihre aktuelle Emotion erfassen und dokumentieren. Die erfassten Daten werden gespeichert und für Eltern übersichtlich visualisiert.
 
@@ -27,7 +27,9 @@ Kinder lernen mithilfe eines spielerischen Ansatzes, ihre Emotionen zu identifiz
 
 Die physische Interaktion mit der Murmelbahn motiviert Kinder zur regelmässigen Nutzung des Systems. Gleichzeitig entsteht eine einfache und verständliche Methode, Emotionen im Alltag zu dokumentieren.
 
-\[*Bilder / GIFs (optional)*\]
+![Physical Computing1](img_readme/Emotionskugel.jpeg)
+![Physical Computing1](img_readme/Physical.jpeg) 
+![Physical Computing1](img_readme/Physical2.jpeg)
 
 ### UX & Konzeption
 
@@ -35,7 +37,7 @@ Die physische Interaktion mit der Murmelbahn motiviert Kinder zur regelmässigen
 
 * **Figma:** [Link zum Figma](https://www.figma.com/design/sp9aHmOb6vmgzlygEPm0ih/Mood-Lane-UX?node-id=30-97&p=f&t=RcCNdvFUaCcnoKYK-0)
 * **User Flow \+ Screen Flow** (Screenshot aus Figma)
-! 
+![Physical Computing1](img_readme/Userflow.png)
 
 ### Welche Features waren angedacht? <br>
 * Physical Computing
@@ -129,6 +131,26 @@ In der Arduino IDE müssen diese Bibliotheken über den Library Manager installi
 Im Arduino-Sketch werden WLAN-Name, Passwort und die Server-URL eingetragen. Beim Hochladen muss die BOOT-Taste gedrückt gehalten werden, bis “Uploading…” erscheint.
 
 Jeden NFC Tag einzeln auf den PN532 halten, die UID erscheint im Serial Monitor. Diese UIDs werden im Code in das emotions[]-Array eingetragen und der Code erneut hochgeladen.
+
+### Aufbau
+1. **Startstation bauen**
+Die Startstation enthält die RFID-Lesefläche. Dort wird die Kugel aufgelegt oder durch eine definierte Stelle geführt.
+2. **RFID-Reader montieren**
+Der Reader wird unter oder direkt bei der Startmulde platziert. Der Abstand zur Kugel muss klein genug sein, damit der RFID-Chip zuverlässig gelesen wird.
+3. **Emotionskugeln vorbereiten**
+Jede Kugel erhält einen RFID-Tag. Jede RFID-ID wird im System einer bestimmten Emotion zugeordnet.
+4. **LED-Feedback integrieren**
+Eine RGB-LED wird an oder nahe der Startstation platziert. Sobald eine Kugel erkannt wurde, leuchtet die LED in der passenden Farbe der Emotion auf.
+5. **Murmelbahn bauen**
+Die Bahn führt von der Startstation zum Auffangbecken. Sie dient primär als haptisches und spielerisches Interface.
+6. **Auffangbecken integrieren**
+Am Ende der Bahn landet die Kugel im Auffangbecken. Die emotionale Erfassung erfolgt bereits über den RFID-Sensor an der Startstation.*
+7. **Komponentenplan**
+Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Mood Lane zusammenarbeiten. Im Zentrum steht der ESP32 als Verbindung zwischen der physischen Murmelbahn und der WebApp.
+
+### Komponentenplan
+Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Mood Lane zusammenarbeiten. Im Zentrum steht der ESP32 als Verbindung zwischen der physischen Murmelbahn und der WebApp.
+![Komponentenplan] (img_readme/Physical
 
 ## Technische Details
 Das Projekt besteht aus zwei Hauptkomponenten:
