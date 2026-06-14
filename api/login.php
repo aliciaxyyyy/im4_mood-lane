@@ -1,6 +1,10 @@
 <?php  
 // API endpoint for user login. It receives email and password via HTTP POST, checks the credentials against the database, and starts a session if the login is successful. The response is returned as JSON indicating success or failure of the login attempt.
-ini_set('session.cookie_secure', 1);
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+    ini_set('session.cookie_secure', 1);
+}
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
 session_start();
 header('Content-Type: application/json');
 

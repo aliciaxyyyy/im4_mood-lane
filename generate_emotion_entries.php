@@ -1,4 +1,6 @@
 <?php
+// This script is used to generate some mock data for testing
+
 $amount = 60;
 $emotions = ["Freude", "Trauer", "Wut", "Angst", "Ekel", "Stolz", "Ueberraschung", "Neutral"];
 $earliestDate = strtotime("-180 days");
