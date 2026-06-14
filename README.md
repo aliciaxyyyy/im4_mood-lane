@@ -76,7 +76,6 @@ Da diese Fragen weitere Anpassungen der Systemarchitektur erfordert hätten, wur
 * **Video-Dokumentation:** [Link zum Video auf Youtube](https://www.youtube.com/watch?v=I8A1v1qAnEo) 
 
 ### Installationsanleitung WebApp
-***verständliche** Schritt-für-Schritt-Anleitung für Aussenstehende, um das Projekt zu klonen und auf einem eigenen Server zu installieren*
 1. Benötigt wird ein Webhost wie z.B. Infomaniak
 2. Darauf muss ein php-Webserver und eine SQL Datenbank aufgesetzt werden
 3. Das github Repo muss geklont werden und auf den php-Webserver geladen werden
@@ -150,7 +149,7 @@ Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Moo
 Der Komponentenplan zeigt, wie die physischen und digitalen Bestandteile von Mood Lane zusammenarbeiten. Im Zentrum steht der ESP32 als Verbindung zwischen der physischen Murmelbahn und der WebApp.
 ![Komponentenplan](img_readme/Physical_map.jpeg)
 
-**die eingesetzten Komponenten**
+**Die eingesetzten Komponenten**
 
 Die eingesetzten Komponenten umfassen sowohl physische Bauteile als auch digitale Systembestandteile. Zu den physischen Komponenten gehören die Emotionskugeln mit RFID-Tags, der RFID-Sensor, der ESP32 und die RGB-LED. Zu den digitalen Komponenten gehören die PHP-API, die MySQL/MariaDB-Datenbank und die WebApp. Zusammen bilden sie den vollständigen Datenfluss von der physischen Erfassung der Emotion bis zur Darstellung in der App.*  
 
@@ -160,11 +159,11 @@ Erkennt die Emotionskugel über den RFID-Tag.
 **Aktor:** Eingebaute LED des ESP32 
 Leuchtet in der passenden Farbe der erkannten Emotion.*  
 
-### die Programme (mit Dateinamen)
+### Die Programme (mit Dateinamen)
 
 ADD ALL FILE NAMES
 
-### die Kommunikationswege
+### Die Kommunikationswege
 RFID-Reader liest die ID der Emotionskugel.
 ESP32 ordnet die RFID-ID einer Emotion zu.
 RGB-LED leuchtet in der passenden Farbe der erkannten Emotion.
