@@ -5,9 +5,9 @@ Mood Lane macht Emotionen sichtbar. Durch die Kombination einer spielerischen Mu
 
 * **Modul:** Interaktive Medien 4 an der Fachhochschule Graubünden (FS26)  
 * **Themenfeld:** IoT-Applikation zum Thema Eltern mit kleinen Kindern  
-* **Name des Projekts:** \[*Mood Lane*\]   
-* **Team Physical Computing:** \[*Natacha-Anina Krenger, Quincy Enoma*\]   
-* **Team WebApp:** \[*Alicia Gregorini, Maya Nikita Baumann*\]
+* **Name des Projekts:** \*Mood Lane*\  
+* **Team Physical Computing:** \*Natacha-Anina Krenger, Quincy Enoma*\  
+* **Team WebApp:** \*Alicia Gregorini, Maya Nikita Baumann*\
 
 Mood Lane ist ein interaktives Physical-Computing-System, das Eltern dabei unterstützt, die Emotionen ihrer Kinder besser zu verstehen und nachzuvollziehen. Durch eine spielerische Kombination aus einer physischen Murmelbahn und einer Webapplikation können Kinder ihre aktuelle Emotion erfassen und dokumentieren. Die erfassten Daten werden gespeichert und für Eltern übersichtlich visualisiert.
 
@@ -104,7 +104,7 @@ Da diese Fragen weitere Anpassungen der Systemarchitektur erfordert hätten, wur
 
 ## Bauanleitung Physical Computing
 
-* ***Was muss ich wie bauen, verbinden, installieren?***  
+**Was muss ich wie bauen, verbinden, installieren?** <br>  
 Man braucht folgende Hardware:
 * Steckplatine
 * ESP32-C6 Mikrocontroller
