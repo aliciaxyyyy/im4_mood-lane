@@ -161,7 +161,54 @@ Leuchtet in der passenden Farbe der erkannten Emotion.*
 
 ### Die Programme (mit Dateinamen)
 
-ADD ALL FILE NAMES
+**`hardware/sketck-connected-final.ino`**  
+Hauptprogramm auf dem ESP32. Liest den RFID-Sensor aus, ordnet die Kugel einer Emotion 
+zu, steuert die eingebaute LED an und sendet den Eintrag an die WebApp.
+
+**`api/device/receive_entry.php`**  
+Empfängt den Emotionseintrag vom ESP32 und speichert ihn in der Datenbank.
+
+**`api/entries/read.php`**  
+Lädt gespeicherte Emotionseinträge aus der Datenbank für die WebApp.
+
+**`api/entries/update.php`**  
+Aktualisiert bestehende Emotionseinträge, z. B. wenn Eltern eine Notiz ergänzen.
+
+**`api/entries/delete.php`**  
+Löscht falsche oder versehentlich erstellte Emotionseinträge.
+
+**`api/auth/login.php`**  
+Verarbeitet den Login der Eltern.
+
+**`api/auth/logout.php`**  
+Beendet die Session und loggt die Eltern aus.
+
+**`api/auth/auth.php`**  
+Prüft, ob eine Person eingeloggt ist und Zugriff auf die WebApp hat.
+
+**`system/config.php`**  
+Enthält die Verbindung zur Datenbank.
+
+**`index.html`**  
+Zeigt die Hauptansicht der WebApp mit Monatsübersicht.
+
+**`entries.html`**  
+Zeigt die Emotionseinträge und die Möglichkeit, Notizen zu ergänzen.
+
+**`insights.html`**  
+Zeigt Auswertungen und Diagramme zu den erfassten Emotionen.
+
+**`js/app.js`**  
+Lädt Daten für die Hauptansicht und stellt sie in der WebApp dar.
+
+**`js/entries.js`**  
+Steuert das Lesen, Bearbeiten und Löschen von Emotionseinträgen.
+
+**`js/insights.js`**  
+Lädt aggregierte Daten und visualisiert die Emotionen als Diagramme.
+
+**`css/style.css`**  
+Enthält das Design und Layout der WebApp.
 
 ### Die Kommunikationswege
 RFID-Reader liest die ID der Emotionskugel.
