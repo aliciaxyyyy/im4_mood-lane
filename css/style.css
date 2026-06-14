@@ -276,6 +276,11 @@ a:hover {
 }
 
 @media (max-width: 767px) {
+  #loginForm, #registerForm {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
   .manage-kids-page .sidebar-container {
     position: fixed;
     inset: 0;
@@ -378,3 +383,11 @@ a:hover {
     width: 100%;
   }
 }
+
+.login-message {
+    min-height: 1.25rem;
+    margin: 0.5rem 0 0;
+    color: #b91c1c;
+    font-weight: 700;
+}
+

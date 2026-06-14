@@ -199,7 +199,7 @@ Gelernt wurde ausserdem, dass ein haptisches Interface viele Detailfragen mit si
 | :--- | :--- |
 | Kind soll keine App bedienen müssen | haptische Murmelbahn als Hauptinterface |
 | Emotion muss eindeutig erkannt werden | RFID-Tags in den Kugeln |
-| Eltern brauchen Orientierung | Web-App mit Monatsübersicht und Insights |
+| Eltern brauchen Orientierung | Web-App mit Monatsübersicht und detailss |
 | Einträge müssen korrigierbar sein | Update- und Delete-Funktionen |
 | direkte Rückmeldung für das Kind | LED leuchtet in Emotionsfarbe |
 | sensible Kinderdaten | Login, Session und Device-Token |

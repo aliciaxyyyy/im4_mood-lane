@@ -3,7 +3,7 @@ h2 {
   margin-bottom: 2rem;
 }
 
-.insight-row-top, .insight-row-bottom {
+.details-row-top, .details-row-bottom {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
@@ -143,4 +143,58 @@ canvas {
 }
 .neutral .fill {
     background-color: #c3c3c3;
+}
+
+@media (max-width: 767px) {
+    main {
+        padding: 4.5rem 1rem 1rem;
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    .details-row-top,
+    .details-row-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .card {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+        padding: 1rem;
+    }
+
+    .card.emotion-flower,
+    .card.emotion-breakdown,
+    .card.entry-count {
+        width: 100%;
+    }
+
+    canvas {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    #emotion-flower {
+        width: 100%;
+        max-width: 260px;
+        height: 260px;
+    }
+
+    .emotion-bar .bar {
+        margin-bottom: 0.65rem;
+    }
+
+    .emotion-percentage {
+        float: none;
+        display: block;
+        margin-top: 0.15rem;
+    }
+
+    #entry-count {
+        font-size: 1.6rem;
+    }
 }
