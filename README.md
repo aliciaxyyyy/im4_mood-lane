@@ -161,7 +161,7 @@ Leuchtet in der passenden Farbe der erkannten Emotion.*
 
 ### Die Programme (mit Dateinamen)
 
-**`hardware/sketck-connected-final.ino`** <br>
+**`hardware/sketch-connected-final.ino`** <br>
 Hauptprogramm auf dem ESP32. Liest den RFID-Sensor aus, ordnet die Kugel einer Emotion 
 zu, steuert die eingebaute LED an und sendet den Eintrag an die WebApp.
 
