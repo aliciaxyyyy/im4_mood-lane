@@ -161,101 +161,101 @@ Leuchtet in der passenden Farbe der erkannten Emotion.*
 
 ### Die Programme (mit Dateinamen)
 
-**`hardware/sketck-connected-final.ino`**  
+**`hardware/sketck-connected-final.ino`** <br>
 Hauptprogramm auf dem ESP32. Liest den RFID-Sensor aus, ordnet die Kugel einer Emotion 
 zu, steuert die eingebaute LED an und sendet den Eintrag an die WebApp.
 
-**`api/load.php`** 
+**`api/load.php`** <br>
 Stellt die Verbindung zur Datenbank her und lädt die für die API benötigten Konfigurationen.
 
-**`api/login.php`** 
+**`api/login.php`** <br>
 Verarbeitet die Anmeldung der Eltern und erstellt eine Benutzersitzung.
 
-**`api/logout.php`** 
+**`api/logout.php`** <br>
 Beendet die aktuelle Benutzersitzung und meldet die Eltern von der WebApp ab.
 
-**`api/register.php`** 
+**`api/register.php`** <br>
 Ermöglicht die Registrierung neuer Elternkonten.
 
-**`api/session.php`** 
+**`api/session.php`** <br>
 Prüft, ob eine gültige Sitzung besteht und ob ein Benutzer angemeldet ist.
 
-**`api/get-kids.php`** 
+**`api/get-kids.php`** <br>
 Lädt die dem Elternkonto zugeordneten Kinder aus der Datenbank.
 
-**`api/add-child.php`** 
+**`api/add-child.php`** <br>
 Fügt ein neues Kind hinzu und speichert dessen Daten in der Datenbank.
 
-**`api/delete-child.php`** 
+**`api/delete-child.php`** <br>
 Löscht ein Kind aus der Datenbank.
 
-**`api/get-entries.php`** 
+**`api/get-entries.php`** <br>
 Lädt alle gespeicherten Emotionseinträge eines ausgewählten Kindes.
 
-**`api/get-entries-between-dates.php`** 
+**`api/get-entries-between-dates.php`** <br>
 Lädt Emotionseinträge eines Kindes innerhalb eines ausgewählten Zeitraums.
 
-**`index.html`** 
+**`index.html`** <br>
 Stellt die Hauptansicht der WebApp dar und visualisiert die erfassten Emotionen eines Kindes in Form von Gläsern nach Zeitraum.
 
-**`details.html`** 
+**`details.html`** <br>
 Zeigt die Emotionseinträge eines ausgewählten Zeitraums im Detail an.
 
-**`login.html`** 
+**`login.html`** <br>
 Stellt das Anmeldeformular für Eltern bereit.
 
-**`register.html`** 
+**`register.html`** <br>
 Stellt das Registrierungsformular für neue Benutzer bereit.
 
-**`manage-kids.html`** 
+**`manage-kids.html`** <br>
 Ermöglicht die Verwaltung der Kinderprofile, einschließlich Hinzufügen und Entfernen von Kindern.
 
-**`js/overview.js`** 
+**`js/overview.js`** <br>
 Lädt Emotionseinträge aus der Datenbank, gruppiert diese nach Zeitraum und stellt sie in der Hauptansicht dar.
 
-**`js/details.js`** 
+**`js/details.js`** <br>
 Lädt und visualisiert die Emotionseinträge eines ausgewählten Zeitraums in der Detailansicht.
 
-**`js/login.js`** 
+**`js/login.js`** <br>
 Steuert die Anmeldung der Eltern und die Kommunikation mit der Login-API.
 
-**`js/logout.js`** 
+**`js/logout.js`** <br>
 Steuert den Logout-Vorgang und leitet den Benutzer nach dem Abmelden weiter.
 
-**`js/register.js`** 
+**`js/register.js`** <br>
 Verarbeitet die Registrierung neuer Benutzerkonten.
 
-**`js/manage-kids.js`** 
+**`js/manage-kids.js`** <br>
 Steuert das Laden, Hinzufügen und Löschen von Kinderprofilen.
 
-**`js/auth-guard.js`** 
+**`js/auth-guard.js`** <br>
 Prüft beim Aufruf geschützter Seiten, ob eine gültige Anmeldung vorliegt.
 
-**`js/mobile-sidebar.js`** 
+**`js/mobile-sidebar.js`** <br>
 Steuert die mobile Navigation und das Verhalten der Seitenleiste auf kleinen Bildschirmen.
 
-**`js/floating-dots.js`** 
+**`js/floating-dots.js`** <br>
 Erzeugt animierte Hintergrundelemente zur visuellen Gestaltung der Benutzeroberfläche.
 
-**`css/style.css`** 
+**`css/style.css`** <br>
 Enthält globale Designvorgaben und grundlegende Layoutdefinitionen für die gesamte WebApp.
 
-**`css/index.css`** 
+**`css/index.css`** <br>
 Definiert das Layout und Design der Hauptansicht.
 
-**`css/insight.css`** 
+**`css/insight.css`** <br>
 Enthält die Gestaltung der Auswertungs- und Analyseansichten.
 
-**`css/login.css`** 
+**`css/login.css`** <br>
 Definiert das Erscheinungsbild der Login-Seite.
 
-**`css/register.css`** 
+**`css/register.css`** <br>
 Definiert das Erscheinungsbild der Registrierungsseite.
 
-**`generate_emotion_entries.php`** 
+**`generate_emotion_entries.php`** <br>
 Erzeugt automatisch Testdaten für Emotionseinträge zu Entwicklungs- und Demonstrationszwecken.
 
-**`moodlane.sql`** 
+**`moodlane.sql`** <br>
 Enthält die Datenbankstruktur sowie die Tabellen der Anwendung.
 
 ### Die Kommunikationswege
